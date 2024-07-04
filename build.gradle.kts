@@ -70,3 +70,19 @@ publishing {
         }
     }
 }
+
+tasks.register<Copy>("prepareNpmPublication") {
+    dependsOn("jsProductionExecutableCompileSync", "jsPackageJson")
+    from("build/js/packages/${project.name}", "README.md")
+    into("build/npm")
+}
+
+tasks.register("publishToNpm") {
+    dependsOn("prepareNpmPublication")
+    doLast {
+        exec {
+            workingDir("build/npm")
+            commandLine("npm", "publish")
+        }
+    }
+}

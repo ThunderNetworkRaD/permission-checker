@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Permission-Checker-jvm-1.0-SNAPSHOT">
+    <output-path>$PROJECT_DIR$/build/libs</output-path>
+    <root id="archive" name="Permission-Checker-jvm-1.0-SNAPSHOT.jar">
+      <element id="module-output" name="Permission-Checker.jvmMain" />
+    </root>
+  </artifact>
+</component>

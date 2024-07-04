@@ -60,7 +60,7 @@ publishing {
 }
 
 tasks.register<Copy>("prepareNpmPublication") {
-    dependsOn("jsProductionExecutableCompileSync", "jsPackageJson")
+    dependsOn("jsNodeProductionLibraryDistribution", "jsPackageJson")
     from("build/js/packages/${project.name}", "README.md")
     into("build/npm")
 }

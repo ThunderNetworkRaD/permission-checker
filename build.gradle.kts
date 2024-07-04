@@ -62,10 +62,10 @@ publishing {
     }
     repositories {
         maven {
-            url = uri("https://path/to/your/maven/repository") // Replace with your Maven repository URL
+            url = uri("https://source.thundernetwork.org/api/packages/ThunderNetworkRaD/maven") // Replace with your Maven repository URL
             credentials {
-                username = "your-username" // Replace with your Maven repository username
-                password = "your-password" // Replace with your Maven repository password
+                username = ""
+                password = ""
             }
         }
     }

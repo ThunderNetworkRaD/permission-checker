@@ -52,14 +52,14 @@ tasks {
 }
 
 publishing {
-    publications {
-        create<MavenPublication>("mavenJava") {
-            from(components["kotlin"])
-            groupId = project.group.toString()
-            artifactId = "permission-checker"
-            version = project.version.toString()
-        }
-    }
+    // publications {
+    //     create<MavenPublication>("mavenJava") {
+    //         from(components["kotlin"])
+    //         groupId = project.group.toString()
+    //         artifactId = "permission-checker"
+    //         version = project.version.toString()
+    //     }
+    // }
     repositories {
         maven {
             url = uri("https://source.thundernetwork.org/api/packages/ThunderNetworkRaD/maven") // Replace with your Maven repository URL

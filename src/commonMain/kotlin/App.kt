@@ -1,5 +1,10 @@
 package org.thundernetwork.permissionchecker
 
+import kotlin.js.ExperimentalJsExport
+import kotlin.js.JsExport
+
+@OptIn(ExperimentalJsExport::class)
+@JsExport
 fun checkSingle(permission: String, requiredPermission: String): Boolean {
     var answer = false
     if (permission === "*") answer = true
@@ -19,6 +24,8 @@ fun checkSingle(permission: String, requiredPermission: String): Boolean {
     return answer
 }
 
+@OptIn(ExperimentalJsExport::class)
+@JsExport
 fun checkList(permission: Array<String>, requiredPermission: Array<String>): Boolean {
     var actualLength = 0
     val requiredLength = requiredPermission.size

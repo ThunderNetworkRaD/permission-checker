@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "org.thundernetwork.permissionchecker"
-version = "2.1"
+version = "2.2"
 
 repositories {
     mavenCentral()
@@ -15,10 +15,11 @@ dependencies {
 
 kotlin {
     jvm {}
-    js {
-        nodejs {
-        }
-        binaries.executable()
+    js (IR) {
+        nodejs {}
+        binaries.library()
+        generateTypeScriptDefinitions()
+        useEsModules()
     }
 
     sourceSets {
@@ -37,19 +38,6 @@ kotlin {
     }
 }
 
-tasks {
-    val jsProductionExecutableCompileSync by getting
-    val jsNodeRun by getting {
-        dependsOn(jsProductionExecutableCompileSync)
-    }
-    val jsNodeDevelopmentRun by getting {
-        dependsOn(jsProductionExecutableCompileSync)
-    }
-    val jsDevelopmentExecutableCompileSync by getting
-    val jsNodeProductionRun by getting {
-        dependsOn(jsDevelopmentExecutableCompileSync)
-    }
-}
 
 publishing {
     // publications {

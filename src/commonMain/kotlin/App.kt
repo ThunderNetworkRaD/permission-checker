@@ -2,7 +2,7 @@ package org.thundernetwork.permissionchecker
 
 fun checkSingle(permission: String, requiredPermission: String): Boolean {
     var answer = false
-    if (permission === "*") answer = true
+    if (permission == "*") answer = true
     else {
         val subRP = requiredPermission.split('.')
         val sub = permission.split('.')

@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "org.thundernetwork.permissionchecker"
-version = "2.2"
+version = "2.2.1"
 
 repositories {
     mavenCentral()

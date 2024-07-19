@@ -51,7 +51,7 @@ jobs:
       run: ./gradlew prepareNpmPublication
       env:
         MAVEN_USERNAME: ${{ github.actor }}
-        MAVEN_PASSWORD: ${{ secrets.GPJ_PASSWORD }}
+        MAVEN_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
         OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
         OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
         SIGNING_KEY: ${{ secrets.SIGNING_KEY }}

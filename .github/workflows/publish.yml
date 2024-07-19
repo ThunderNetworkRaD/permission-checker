@@ -76,6 +76,6 @@ jobs:
         node-version: '20.x'
         registry-url: 'https://registry.npmjs.org'
     - name: Publish to NPM
-      run: npm publish --provenance --access public
+      run: ./gradlew publishToNpm
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

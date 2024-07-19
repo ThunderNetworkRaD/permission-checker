@@ -65,36 +65,6 @@ tasks.register("publishToNpm") {
 }
 
 publishing {
-    publications {
-        create<MavenPublication>("mavenJava") {
-            from(components["kotlin"])
-
-            pom {
-                name.set("Permission Checker")
-                description.set("A project for checking permissions")
-                url.set("https://github.com/ThunderNetworkRaD/permission-checker")
-                licenses {
-                    license {
-                        name.set("The Apache License, Version 2.0")
-                        url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
-                    }
-                }
-                developers {
-                    developer {
-                        id.set("thundernetwork")
-                        name.set("Thunder Network")
-                        email.set("thundernetwork.org@gmail.com")
-                    }
-                }
-                scm {
-                    connection.set("scm:git:git://github.com/ThunderNetworkRaD/permission-checker.git")
-                    developerConnection.set("scm:git:ssh://github.com/ThunderNetworkRaD/permission-checker.git")
-                    url.set("https://github.com/ThunderNetworkRaD/permission-checker")
-                }
-            }
-        }
-    }
-
     repositories {
 //        maven {
 //            name = "OSSRH"

@@ -116,8 +116,8 @@ publishing {
             name = "OSSRH"
             url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
             credentials {
-                username = System.getenv("MAVEN_USERNAME")
-                password = System.getenv("MAVEN_PASSWORD")
+                username = System.getenv("OSSRH_USERNAME")
+                password = System.getenv("OSSRH_PASSWORD")
             }
         }
         maven {
@@ -125,7 +125,7 @@ publishing {
             url = uri("https://maven.pkg.github.com/ThunderNetworkRaD/permission-checker")
             credentials {
                 username = System.getenv("GITHUB_ACTOR")
-                password = System.getenv("GPJ_PASSWORD")
+                password = System.getenv("GITHUB_TOKEN")
             }
         }
     }

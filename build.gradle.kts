@@ -112,14 +112,14 @@ publishing {
     }
 
     repositories {
-        maven {
-            name = "OSSRH"
-            url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
-            credentials {
-                username = System.getenv("OSSRH_USERNAME")
-                password = System.getenv("OSSRH_PASSWORD")
-            }
-        }
+//        maven {
+//            name = "OSSRH"
+//            url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
+//            credentials {
+//                username = System.getenv("OSSRH_USERNAME")
+//                password = System.getenv("OSSRH_PASSWORD")
+//            }
+//        }
         maven {
             name = "GitHub"
             url = uri("https://maven.pkg.github.com/ThunderNetworkRaD/permission-checker")

@@ -64,26 +64,10 @@ tasks.register("publishToNpm") {
     }
 }
 
-tasks.register<Jar>("dokkaHtmlJar") {
-    dependsOn(tasks.dokkaHtml)
-    from(tasks.dokkaHtml.flatMap { it.outputDirectory })
-    archiveClassifier.set("html-docs")
-}
-
-tasks.register<Jar>("dokkaJavadocJar") {
-    dependsOn(tasks.dokkaJavadoc)
-    from(tasks.dokkaJavadoc.flatMap { it.outputDirectory })
-    archiveClassifier.set("javadoc")
-}
-
-
 publishing {
     publications {
         create<MavenPublication>("mavenJava") {
             from(components["kotlin"])
-
-            artifact(tasks["dokkaHtmlJar"])
-            artifact(tasks["dokkaJavadocJar"])
 
             pom {
                 name.set("Permission Checker")

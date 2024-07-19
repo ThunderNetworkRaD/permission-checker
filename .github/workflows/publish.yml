@@ -40,8 +40,7 @@ jobs:
     - name: Publish JVM Package
       run: ./gradlew publish
       env:
-        MAVEN_USERNAME: ${{ github.actor }}
-        MAVEN_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
         OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
         SIGNING_KEY: ${{ secrets.SIGNING_KEY }}

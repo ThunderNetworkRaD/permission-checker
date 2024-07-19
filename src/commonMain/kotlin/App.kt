@@ -1,5 +1,12 @@
 package org.thundernetwork.permissionchecker
 
+/**
+ * Checks if a given permission matches a required permission.
+ *
+ * @param  permission         the permission to check
+ * @param  requiredPermission the required permission
+ * @return                    true if the permission matches the required permission, false otherwise
+ */
 fun checkSingle(permission: String, requiredPermission: String): Boolean {
     var answer = false
     if (permission == "*") answer = true
@@ -19,6 +26,13 @@ fun checkSingle(permission: String, requiredPermission: String): Boolean {
     return answer
 }
 
+/**
+ * Checks if the given list of permissions contains all the required permissions.
+ *
+ * @param permission     the list of permissions to check
+ * @param requiredPermission the list of required permissions
+ * @return true if all the required permissions are present in the given list of permissions, false otherwise
+ */
 fun checkList(permission: Array<String>, requiredPermission: Array<String>): Boolean {
     var actualLength = 0
     val requiredLength = requiredPermission.size

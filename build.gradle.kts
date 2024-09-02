@@ -1,15 +1,14 @@
 plugins {
-    kotlin("multiplatform") version "2.0.0"
+    kotlin("multiplatform") version "2.0.20"
     id("maven-publish")
     id("signing")
-    id("org.jetbrains.dokka") version "1.9.20"
 }
 
 group = "org.thundernetwork.permissionchecker"
-version = "3.0.0"
+version = "3.0.1"
 
 repositories {
-    mavenCentral()
+    maven("https://repository.thundernetwork.org/repository/maven-central/")
 }
 
 dependencies {
@@ -24,6 +23,10 @@ kotlin {
         binaries.library()
         generateTypeScriptDefinitions()
         useEsModules()
+
+        compilations["main"].packageJson {
+            customField("types", "kotlin/${project.name}.d.ts")
+        }
     }
 
     sourceSets {
@@ -49,7 +52,7 @@ kotlin {
 }
 
 tasks.register<Copy>("prepareNpmPublication") {
-    dependsOn("jsNodeProductionLibraryDistribution", "jsPackageJson")
+    dependsOn("kotlinUpgradeYarnLock", "jsNodeProductionLibraryDistribution", "jsPackageJson")
     from("build/js/packages/${project.name}", "README.md")
     into("build/npm")
 }
@@ -66,14 +69,6 @@ tasks.register("publishToNpm") {
 
 publishing {
     repositories {
-//        maven {
-//            name = "OSSRH"
-//            url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
-//            credentials {
-//                username = System.getenv("OSSRH_USERNAME")
-//                password = System.getenv("OSSRH_PASSWORD")
-//            }
-//        }
         maven {
             name = "GitHub"
             url = uri("https://maven.pkg.github.com/ThunderNetworkRaD/permission-checker")
@@ -84,3 +79,13 @@ publishing {
         }
     }
 }
+
+//rootProject.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin> {
+//    rootProject.the<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension>().download = false
+//    // "true" for default behavior
+//}
+//
+//rootProject.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin> {
+//    rootProject.the<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension>().download = false
+//    // "true" for default behavior
+//}

@@ -1,10 +1,14 @@
-import { checkList } from "./list";
-import { checkSingle } from "./single";
+import { checkList } from "./list.js";
+import { checkSingle } from "./single.js";
+import { evaluate } from "./evaluate.js";
+import { fill } from "./fill.js";
 
 export default {
     checkList,
-    checkSingle
+    checkSingle,
+    evaluate,
+    fill,
 };
 
 // Also export as named exports for better tree-shaking
-export { checkList, checkSingle };
+export { checkList, checkSingle, evaluate, fill };

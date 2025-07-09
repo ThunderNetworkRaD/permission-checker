@@ -1,4 +1,4 @@
-import { fill } from "./fill";
+import { fill } from "./fill.js";
 
 /**
  * Checks if a single permission matches a required permission.

@@ -1,4 +1,4 @@
-import { checkSingle } from "./single";
+import { checkSingle } from "./single.js";
 
 /**
  * Checks if all required permissions are satisfied by the provided permissions.

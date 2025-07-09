@@ -1,4 +1,4 @@
-import { checkList } from "./list"
+import { checkList } from "./list.js"
 
 /**
  * Represents a logical AND operation between multiple permission calculations.

@@ -1,10 +1,23 @@
 {
   "name": "permission-checker",
   "version": "4.0.0",
-  "description": "A permission checker for JS and TS.",
-  "main": "build/index.js",
-  "types": "build/index.d.ts",
+  "description": "A permission checker for JS and TS with support for Node.js, Bun, and browsers",
   "type": "module",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.mjs",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.cjs",
+      "types": "./dist/types/index.d.ts",
+      "browser": "./dist/esm/index.js"
+    }
+  },
+  "browser": "./dist/esm/index.js",
+  "files": [
+    "dist"
+  ],
   "repository": "https://source.thundernetwork.org/ThunderNetworkRaD/permission-checker",
   "author": {
     "name": "ThunderNetworkRaD",
@@ -27,11 +40,30 @@
   ],
   "license": "Apache-2.0",
   "private": false,
-  "dependencies": {
+  "devDependencies": {
+    "@types/node": "^20.19.6",
+    "bun-types": "^1.2.18",
     "typescript": "^5.8.3"
   },
   "scripts": {
-    "test": "tsc && node .",
-    "build": "tsc"
-  }
+    "clean": "rm -rf dist",
+    "build:esm": "mkdir -p dist/esm && cp src/index.ts dist/esm/ && bun build ./dist/esm/index.ts --outfile ./dist/esm/index.js --format esm --target browser --minify --sourcemap",
+    "build:cjs": "mkdir -p dist/cjs && cp src/index.ts dist/cjs/ && bun build ./dist/cjs/index.ts --outfile ./dist/cjs/index.cjs --format cjs --target node --minify --sourcemap",
+    "build:types": "mkdir -p dist/types && cp src/index.ts dist/types/ && tsc --emitDeclarationOnly --declaration --declarationMap --outDir dist/types dist/types/index.ts",
+    "build": "bun run clean && mkdir -p dist && bun run build:esm && bun run build:cjs && bun run build:types",
+    "test": "bun test",
+    "prepublishOnly": "bun run clean && bun run build"
+  },
+  "keywords": [
+    "permissions",
+    "authorization",
+    "node",
+    "browser",
+    "bun",
+    "typescript",
+    "javascript",
+    "esm",
+    "cjs",
+    "umd"
+  ]
 }

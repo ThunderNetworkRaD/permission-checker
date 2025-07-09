@@ -180,6 +180,8 @@ With 2 values, `x` and `y`, the empty string, and `*`
 | `*`        | `x`       | `TRUE`   | \* includes all (e.g. `a.* & a.b`)                           |
 | `x`        | `*`       | `FALSE`  | \* includes all (e.g. `a.b & a.*`)                           |
 |            |           | `TRUE`   | Do not use empty string as permission.                       |
+| `not`      | `x`       | `ERROR`  | Do not use "not" as permission.                              |
+| `x`        | `not`     | `FALSE`  | Always false.                                                |
 
 ## Advanced Usage
 

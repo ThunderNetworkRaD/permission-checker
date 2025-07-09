@@ -105,6 +105,7 @@ dist
 
 # Lock
 package-lock.json
+bun.lock
 
 # Build
 build

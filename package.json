@@ -1,16 +1,34 @@
 {
   "name": "permission-checker",
-  "version": "1.0.7",
-  "description": "A permission checker for Node JS",
+  "version": "4.0.0",
+  "description": "A permission checker for JS and TS.",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "type": "module",
-  "repository": "https://github.com/ThunderNetworkRaD/TS-Permission-Checker",
-  "author": "ThunderNetworkRaD | Killer Boss Original",
-  "license": "Mozilla Public License 2.0",
+  "repository": "https://source.thundernetwork.org/ThunderNetworkRaD/permission-checker",
+  "author": {
+    "name": "ThunderNetworkRaD",
+    "email": "thundernetwork.org@gmail.com",
+    "url": "https://source.thundernetwork.org/ThunderNetworkRaD"
+  },
+  "maintainers": [
+    {
+      "name": "KillerBossOriginal",
+      "email": "killerbossoriginal@outlook.it",
+      "url": "https://source.thundernetwork.org/KillerBossOriginal"
+    }
+  ],
+  "contributors": [
+    {
+      "name": "KillerBossOriginal",
+      "email": "killerbossoriginal@outlook.it",
+      "url": "https://source.thundernetwork.org/KillerBossOriginal"
+    }
+  ],
+  "license": "Apache-2.0",
   "private": false,
   "dependencies": {
-    "typescript": "^5.1.3"
+    "typescript": "^5.8.3"
   },
   "scripts": {
     "test": "tsc && node .",

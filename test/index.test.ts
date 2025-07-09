@@ -2,26 +2,50 @@ import { checkSingle, checkList } from '../src/index';
 
 describe('checkSingle', () => {
     // Test wildcard permissions
-    test('should return true for wildcard permission', () => {
+    test('should handle wildcard permissions', () => {
+        // Global wildcard
+        expect(checkSingle('*', '*')).toBe(true);
         expect(checkSingle('*', 'any.permission')).toBe(true);
         expect(checkSingle('*', 'user.read')).toBe(true);
         expect(checkSingle('*', 'admin')).toBe(true);
+        expect(checkSingle('*', 'a*')).toBe(true);
+        expect(checkSingle('*', 'a.*')).toBe(true);
+        
+        // Partial wildcards
+        expect(checkSingle('a.*', 'a.*')).toBe(true);
+        expect(checkSingle('a.*', 'a.b')).toBe(true);
+        expect(checkSingle('a.*', 'a')).toBe(false);
     });
 
-    // Test exact matches
-    test('should return true for exact matches', () => {
+    // Test exact matches and simple permissions
+    test('should handle exact matches and simple permissions', () => {
+        // Exact matches
+        expect(checkSingle('a', 'a')).toBe(true);
+        expect(checkSingle('a.a', 'a.a')).toBe(true);
         expect(checkSingle('user.read', 'user.read')).toBe(true);
         expect(checkSingle('admin', 'admin')).toBe(true);
+        
+        // Non-matches
+        expect(checkSingle('a', 'b')).toBe(false);
+        expect(checkSingle('a.a', 'a.b')).toBe(false);
     });
 
     // Test hierarchical permissions
     test('should handle hierarchical permissions', () => {
         // Parent permission includes child permissions
+        expect(checkSingle('a', 'a.b')).toBe(true);
         expect(checkSingle('user', 'user.read')).toBe(true);
         expect(checkSingle('user', 'user.profile.view')).toBe(true);
         
         // But not the other way around
+        expect(checkSingle('a.b', 'a')).toBe(false);
         expect(checkSingle('user.read', 'user')).toBe(false);
+        
+        // Special cases with wildcards
+        expect(checkSingle('a', 'a.*')).toBe(true);
+        expect(checkSingle('a.*', 'a')).toBe(false);
+        expect(checkSingle('a.*', 'a.b')).toBe(true);
+        expect(checkSingle('a.b', 'a.*')).toBe(false);
     });
 
     // Test partial wildcards
@@ -34,8 +58,12 @@ describe('checkSingle', () => {
         expect(checkSingle('user.*', 'admin.read')).toBe(false);
     });
 
-    // Test invalid cases
-    test('should return false for non-matching permissions', () => {
+    // Test edge cases
+    test('should handle edge cases', () => {
+        // Empty strings
+        expect(checkSingle('', '')).toBe(true);
+        
+        // Non-matching permissions
         expect(checkSingle('user.read', 'user.write')).toBe(false);
         expect(checkSingle('user', 'admin')).toBe(false);
         expect(checkSingle('user.read', 'read.user')).toBe(false);
@@ -59,16 +87,27 @@ describe('checkList', () => {
 
     // Test multiple permissions
     test('should check multiple permissions', () => {
-        const userPermissions = ['user.read', 'user.write', 'admin'];
+        const userPermissions = ['user.read', 'user.write', 'admin', 'a.*'];
     
         // All required permissions are present
         expect(checkList(userPermissions, ['user.read', 'user.write'])).toBe(true);
-    
+        
+        // Hierarchical permissions
+        expect(checkList(userPermissions, ['user.read', 'user'])).toBe(false);
+        
+        // Wildcard permissions
+        expect(checkList(userPermissions, ['a.b', 'a.c'])).toBe(true);
+        
         // Some required permissions are missing
         expect(checkList(userPermissions, ['user.read', 'admin.delete'])).toBe(true);
-    
-        // Wildcard covers all
+        
+        // Global wildcard covers all
         expect(checkList(['*'], ['user.read', 'admin.delete'])).toBe(true);
+        
+        // Test with empty arrays
+        expect(checkList([], [])).toBe(true);
+        expect(checkList([], ['user.read'])).toBe(false);
+        expect(checkList(['user.read'], [])).toBe(true);
     });
 
     // Test hierarchical permissions

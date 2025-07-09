@@ -1,3 +1,10 @@
+function fill(array: string[], length: number): string[] {
+    while (array.length < length) {
+        array.push('');
+    }
+    return array;
+}
+
 /**
  * Checks if a single permission matches a required permission.
  * Supports wildcard (*) and hierarchical permissions (e.g., 'user.read' matches 'user.read.write')
@@ -5,36 +12,44 @@
  * @param perm - The permission to check (e.g., 'user.read' or '*')
  * @param reqPerm - The required permission to check against (e.g., 'user.read')
  * @returns {boolean} True if the permission is granted, false otherwise
+ * 
+ * With 2 values, `x` and `y`, the empty string, and `*`
+ * 
+ * | Permission | Required  | Result   | Description                                                  |
+ * | ---------- | --------- | -------- | ------------------------------------------------------------ |
+ * | `*`        | `*`       | `TRUE`   | Two equal permissions (e.g. `a.* & a.*`)                     |
+ * | `x`        | `x`       | `TRUE`   | Two equal permissions (e.g. `a.b & a.b`)                     |
+ * | `x`        | `y`       | `FALSE`  | Two different permissions (e.g. `a.b & a.c`)                 |
+ * |            | `x`       | `TRUE`   | The empty string represents all permissions (e.g. `a & a.b`) |
+ * | `x`        |           | `FALSE`  | The empty string represents all permissions (e.g. `a.b & a`) |
+ * |            | `*`       | `TRUE`   | The empty string includes \* (e.g. `a & a.*`)                |
+ * | `*`        |           | `FALSE`  | The empty string includes \* (e.g. `a.* & a`)                |
+ * | `*`        | `x`       | `TRUE`   | \* includes all (e.g. `a.* & a.b`)                           |
+ * | `x`        | `*`       | `FALSE`  | \* includes all (e.g. `a.b & a.*`)                           |
+ * |            |           | `TRUE`   | Do not use empty string as permission.                       |
  */
 function checkSingle(perm: string, reqPerm: string): boolean {
-    // If the permission is a wildcard, it matches everything
-    if (perm === '*') {
-        return true;
-    }
+    let presenti = perm.split('.');
+    let richiesti = reqPerm.split('.');
 
-    const permParts = perm.split('.');
-    const reqParts = reqPerm.split('.');
-
-    // If the permission has more parts than required, it can't be a match
-    // unless the last part is a wildcard
-    if (permParts.length > reqParts.length && permParts[permParts.length - 1] !== '*') {
-        return false;
-    }
+    const max = Math.max(presenti.length, richiesti.length);
+    presenti = fill(presenti, max);
+    richiesti = fill(richiesti, max);
 
     // Check each part of the permission
-    for (let i = 0; i < Math.min(permParts.length, reqParts.length); i++) {
-        // If the current part is a wildcard, the rest is considered a match
-        if (permParts[i] === '*') {
+    for (let i = 0; i < max; i++) {
+        const presente: string = presenti[i];
+        const richiesto: string = richiesti[i];
+
+        if (presente === richiesto) {
+            continue;
+        } else if (presente === '' || (presente === '*' && richiesto !== '')) {
             return true;
-        }
-        
-        // If parts don't match, the permission is not granted
-        if (permParts[i] !== reqParts[i]) {
+        } else {
             return false;
         }
     }
 
-    // If we've checked all parts and they match, the permission is granted
     return true;
 }
 

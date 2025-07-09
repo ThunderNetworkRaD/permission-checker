@@ -166,6 +166,21 @@ checkList(
 ); // true
 ```
 
+# Result table
+With 2 values, `x` and `y`, the empty string, and `*`
+| Permission | Required  | Result   | Description                                                  |
+| ---------- | --------- | -------- | ------------------------------------------------------------ |
+| `*`        | `*`       | `TRUE`   | Two equal permissions (e.g. `a.* & a.*`)                     |
+| `x`        | `x`       | `TRUE`   | Two equal permissions (e.g. `a.b & a.b`)                     |
+| `x`        | `y`       | `FALSE`  | Two different permissions (e.g. `a.b & a.c`)                 |
+|            | `x`       | `TRUE`   | The empty string represents all permissions (e.g. `a & a.b`) |
+| `x`        |           | `FALSE`  | The empty string represents all permissions (e.g. `a.b & a`) |
+|            | `*`       | `TRUE`   | The empty string includes \* (e.g. `a & a.*`)                |
+| `*`        |           | `FALSE`  | The empty string includes \* (e.g. `a.* & a`)                |
+| `*`        | `x`       | `TRUE`   | \* includes all (e.g. `a.* & a.b`)                           |
+| `x`        | `*`       | `FALSE`  | \* includes all (e.g. `a.b & a.*`)                           |
+|            |           | `TRUE`   | Do not use empty string as permission.                       |
+
 ## Advanced Usage
 
 ### TypeScript Support

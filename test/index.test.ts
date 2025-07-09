@@ -1,4 +1,5 @@
 import { checkSingle, checkList } from '../src/index';
+import { fill } from '../src/fill';
 
 describe('checkSingle', () => {
     // Test wildcard permissions
@@ -133,5 +134,37 @@ describe('CommonJS compatibility', () => {
     test('should work with named imports', () => {
         expect(permissionChecker.checkSingle('*', 'test')).toBe(true);
         expect(permissionChecker.checkList(['*'], ['test'])).toBe(true);
+    });
+});
+
+describe('fill', () => {
+    test('should pad array with empty strings to reach specified length', () => {
+        // Test basic padding
+        expect(fill(['a', 'b'], 3)).toEqual(['a', 'b', '']);
+        
+        // Test when array is already long enough
+        expect(fill(['a', 'b', 'c'], 2)).toEqual(['a', 'b', 'c']);
+        
+        // Test with empty array
+        expect(fill([], 3)).toEqual(['', '', '']);
+        
+        // Test with length 0
+        expect(fill(['a', 'b'], 0)).toEqual(['a', 'b']);
+        
+        // Test with negative length (should behave the same as 0)
+        expect(fill(['a', 'b'], -1)).toEqual(['a', 'b']);
+    });
+    
+    test('should handle edge cases', () => {
+        // Test with empty array and length 0
+        expect(fill([], 0)).toEqual([]);
+        
+        // Test with non-array input (TypeScript should catch this, but good to test runtime behavior)
+        // @ts-ignore
+        expect(() => fill(null, 2)).toThrow();
+        
+        // Test with non-number length (TypeScript should catch this, but good to test runtime behavior)
+        // @ts-ignore
+        expect(() => fill([], '2')).toThrow();
     });
 });

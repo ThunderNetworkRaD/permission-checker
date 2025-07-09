@@ -183,6 +183,87 @@ With 2 values, `x` and `y`, the empty string, and `*`
 | `not`      | `x`       | `ERROR`  | Do not use "not" as permission.                              |
 | `x`        | `not`     | `FALSE`  | Always false.                                                |
 
+## Advanced API
+
+### `fill(array: string[], length: number): string[]`
+
+Pads an array with empty strings until it reaches the specified length. If the array is already longer than the specified length, it is returned unchanged.
+
+#### Parameters
+- `array`: The array to pad with empty strings
+- `length`: The desired length of the array
+
+#### Returns
+- `string[]`: A new array with length at least `length`, padded with empty strings if necessary
+
+#### Example
+```typescript
+import { fill } from 'permission-checker';
+
+// Returns ['a', 'b', '']
+fill(['a', 'b'], 3);
+
+// Returns ['a', 'b']
+fill(['a', 'b'], 1);
+```
+
+### `evaluate(permissions: string[], calculation: Calculation): boolean`
+
+Evaluates complex permission calculations against a set of user permissions, supporting logical AND, OR, and NOT operations.
+
+#### Parameters
+- `permissions`: Array of permission strings that the user has
+- `calculation`: The permission calculation to evaluate (can be an AND, OR, NOT operation, or a direct permission check)
+
+#### Returns
+- `boolean`: `true` if the calculation evaluates to true with the given permissions, `false` otherwise
+
+#### Types
+```typescript
+type And = { $and: Calculation[] };
+type Or = { $or: Calculation[] };
+type Not = { $not: Calculation };
+type Permission = string[];
+type Calculation = And | Or | Not | Permission;
+```
+
+#### Examples
+```typescript
+import { evaluate } from 'permission-checker';
+
+// Simple permission check
+evaluate(['user.read', 'user.write'], ['user.read']); // true
+
+// AND operation
+evaluate(
+  ['user.read', 'user.write'],
+  { $and: [['user.read'], ['user.write']] }
+); // true
+
+// OR operation
+evaluate(
+  ['user.read'],
+  { $or: [['user.read'], ['admin.access']] }
+); // true
+
+// NOT operation
+evaluate(
+  ['user.read'],
+  { $not: ['admin.access'] }
+); // true
+
+// Complex nested operations
+evaluate(
+  ['user.read', 'admin.dashboard'],
+  {
+    $and: [
+      { $or: [['user.read'], ['user.write']] },
+      { $not: ['admin.settings'] }
+    ]
+  }
+); // true
+```
+
 ## Advanced Usage
 
 ### TypeScript Support
@@ -219,6 +300,7 @@ Contributions are welcome! Please see our [Contributing Guidelines](CONTRIBUTING
 
 Apache-2.0 © [ThunderNetworkRaD](https://source.thundernetwork.org/ThunderNetworkRaD)
 
+```typescript
 // Wildcard support
 console.log(checkList(["*"], ["any.permission"])); // true
 
@@ -238,10 +320,6 @@ console.log(
   )
 ); // true (user includes all sub-permissions)
 ```
-
-## TypeScript Support
-
-Full TypeScript type definitions are included out of the box.
 
 ## Contributing
 

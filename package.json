@@ -1,16 +1,16 @@
 {
   "name": "permission-checker",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "A permission checker for JS and TS with support for Node.js, Bun, and browsers",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
-  "types": "./dist/types/index.d.ts",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs",
-      "types": "./dist/types/index.d.ts",
+      "types": "./dist/index.d.ts",
       "browser": "./dist/index.mjs"
     }
   },

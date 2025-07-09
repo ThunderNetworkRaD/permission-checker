@@ -1,6 +1,6 @@
 {
   "name": "permission-checker",
-  "version": "4.0.3",
+  "version": "4.0.4",
   "description": "A permission checker for JS and TS with support for Node.js, Bun, and browsers",
   "type": "module",
   "main": "./launchers/index.cjs",

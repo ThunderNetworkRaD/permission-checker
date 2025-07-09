@@ -3,18 +3,18 @@
   "version": "4.0.0",
   "description": "A permission checker for JS and TS with support for Node.js, Bun, and browsers",
   "type": "module",
-  "main": "./dist/cjs/index.js",
-  "module": "./dist/esm/index.mjs",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
   "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.cjs",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs",
       "types": "./dist/types/index.d.ts",
-      "browser": "./dist/esm/index.js"
+      "browser": "./dist/index.mjs"
     }
   },
-  "browser": "./dist/esm/index.js",
+  "browser": "./dist/index.mjs",
   "files": [
     "dist"
   ],
@@ -43,16 +43,17 @@
   "devDependencies": {
     "@types/node": "^20.19.6",
     "bun-types": "^1.2.18",
+    "rimraf": "^6.0.1",
     "typescript": "^5.8.3"
   },
   "scripts": {
-    "clean": "rm -rf dist",
-    "build:esm": "mkdir -p dist/esm && cp src/index.ts dist/esm/ && bun build ./dist/esm/index.ts --outfile ./dist/esm/index.js --format esm --target browser --minify --sourcemap",
-    "build:cjs": "mkdir -p dist/cjs && cp src/index.ts dist/cjs/ && bun build ./dist/cjs/index.ts --outfile ./dist/cjs/index.cjs --format cjs --target node --minify --sourcemap",
-    "build:types": "mkdir -p dist/types && cp src/index.ts dist/types/ && tsc --emitDeclarationOnly --declaration --declarationMap --outDir dist/types dist/types/index.ts",
-    "build": "bun run clean && mkdir -p dist && bun run build:esm && bun run build:cjs && bun run build:types",
+    "clean": "bunx rimraf dist",
+    "build:esm": "bun build ./src/ --outfile ./dist/index.mjs --format esm --target browser --minify",
+    "build:cjs": "bun build ./src/ --outfile ./dist/index.cjs --format cjs --target node --minify",
+    "build:types": "tsc --emitDeclarationOnly --declaration --outFile ./dist/index.d.ts src/index.ts --declarationMap",
+    "build": "bun run build:esm && bun run build:cjs && bun run build:types",
     "test": "bun test",
-    "prepublishOnly": "bun run clean && bun run build"
+    "prepublishOnly": "bun run build"
   },
   "keywords": [
     "permissions",

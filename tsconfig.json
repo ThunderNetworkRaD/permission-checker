@@ -1,19 +1,14 @@
 {
   "compilerOptions": {
     "target": "ES2020",
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "esModuleInterop": true,
+    "module": "NodeNext",
     "strict": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true,
-    "rootDir": ".",
-    "outDir": "./dist",
+    "esModuleInterop": true,
+    "moduleResolution": "NodeNext",
     "baseUrl": ".",
-    "types": ["bun-types"],
+    "types": ["bun-types", "node"],
     "lib": ["ES2020", "DOM"],
     "allowJs": true,
     "resolveJsonModule": true,
@@ -21,6 +16,6 @@
     "noEmit": true,
     "composite": true
   },
-  "include": ["src", "test"],
+  "include": ["src"],
   "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.spec.ts"]
 }

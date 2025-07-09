@@ -3,25 +3,24 @@
   "version": "4.0.2",
   "description": "A permission checker for JS and TS with support for Node.js, Bun, and browsers",
   "type": "module",
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
-  "exports": {
+  "main": "./launchers/index.cjs",
+  "module": "./launchers/index.mjs",
+  "types": "./dist/types/index.d.ts",
+  "browser": "./launchers/index.mjs",
+  "off:exports": {
     ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs",
-      "types": "./dist/index.d.ts",
-      "browser": "./dist/index.mjs"
-    },
-    "./*": {
-      "import": "./dist/*.mjs",
-      "require": "./dist/*.cjs",
-      "types": "./dist/*.d.ts"
+      "import": {
+        "default": "./launchers/index.mjs"
+      },
+      "require": {
+        "default": "./launchers/index.cjs"
+      },
+      "browser": "./launchers/index.mjs"
     }
   },
-  "browser": "./dist/index.mjs",
   "files": [
-    "dist"
+    "dist",
+    "launchers"
   ],
   "repository": "https://source.thundernetwork.org/ThunderNetworkRaD/permission-checker",
   "author": {
@@ -53,10 +52,10 @@
   },
   "scripts": {
     "clean": "bunx rimraf dist",
-    "build:esm": "bun build ./src/ --outfile ./dist/index.mjs --format esm --target browser --minify",
-    "build:cjs": "bun build ./src/ --outfile ./dist/index.cjs --format cjs --target node --minify",
-    "build:types": "tsc --emitDeclarationOnly --declaration --outFile ./dist/index.d.ts src/index.ts --declarationMap",
-    "build": "bun run build:esm && bun run build:cjs && bun run build:types",
+    "build:esm": "tsc src/index.ts --module ESNext --moduleResolution bundler --target ES2020 --outDir ./dist/module --sourceMap --esModuleInterop --skipLibCheck --forceConsistentCasingInFileNames",
+    "build:cjs": "tsc src/index.ts --module CommonJS --moduleResolution node --target ES2020 --outDir ./dist/common --sourceMap --esModuleInterop --skipLibCheck --forceConsistentCasingInFileNames",
+    "build:types": "tsc --emitDeclarationOnly --declaration --outDir ./dist/types src/index.ts --declarationMap",
+    "build": "bun run clean && mkdir -p dist && bun run build:esm && bun run build:cjs && bun run build:types",
     "test": "bun test",
     "prepublishOnly": "bun run build"
   },

@@ -51,7 +51,7 @@
     "clean": "bunx rimraf dist",
     "build:esm": "tsc -p tsconfig.esm.json",
     "build:cjs": "tsc -p tsconfig.cjs.json",
-    "build:types": "tsc -p tsconfig.dec.json",
+    "build:types": "tsc -p tsconfig.types.json",
     "build": "bun run clean && mkdir -p dist && bun run build:esm && bun run build:cjs && bun run build:types",
     "test": "bun test",
     "prepublishOnly": "bun run build"

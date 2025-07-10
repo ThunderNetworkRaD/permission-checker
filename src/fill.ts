@@ -13,7 +13,7 @@
  * // Returns ['a', 'b']
  * fill(['a', 'b'], 1);
  */
-export function fill(array: string[], length: number): string[] {
+export default function fill(array: string[], length: number): string[] {
     while (array.length < length) {
         array.push('');
     }

@@ -1,4 +1,4 @@
-import { fill } from "./fill.js";
+import fill from "./fill.js";
 
 /**
  * Checks if a single permission matches a required permission.
@@ -25,7 +25,7 @@ import { fill } from "./fill.js";
  * | `not`      | `x`       | `ERROR`  | Do not use "not" as permission.                              |
  * | `x`        | `not`     | `FALSE`  | Always false.                                                |
  */
-export function checkSingle(perm: string, reqPerm: string): boolean {
+export default function checkSingle(perm: string, reqPerm: string): boolean {
     let presenti = perm.split('.');
     let richiesti = reqPerm.split('.');
 

@@ -1,4 +1,4 @@
-import { checkList } from "./list.js"
+import checkList from "./list.js"
 
 /**
  * Represents a logical AND operation between multiple permission calculations.
@@ -47,7 +47,7 @@ export type Calculation = And | Or | Not | Permission
  * // Returns true if user has both 'user.read' and 'user.write' permissions
  * evaluate(['user.read', 'user.write'], { $and: [['user.read'], ['user.write']] })
  */
-export function evaluate(permissions: string[], calculation: Calculation): boolean {
+export default function evaluate(permissions: string[], calculation: Calculation): boolean {
     if ('$and' in calculation) {
         return calculation.$and.every((calc) => evaluate(permissions, calc));
     } else if ('$or' in calculation) {

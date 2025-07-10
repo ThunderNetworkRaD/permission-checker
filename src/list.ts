@@ -1,4 +1,4 @@
-import { checkSingle } from "./single.js";
+import checkSingle from "./single.js";
 
 /**
  * Checks if all required permissions are satisfied by the provided permissions.
@@ -7,7 +7,7 @@ import { checkSingle } from "./single.js";
  * @param requiredPermissions - Array of permissions that are required
  * @returns {boolean} True if all required permissions are satisfied, false otherwise
  */
-export function checkList(permissions: string[], requiredPermissions: string[]): boolean {
+export default function checkList(permissions: string[], requiredPermissions: string[]): boolean {
     // If no permissions are required, return true
     if (!requiredPermissions.length) {
         return true;

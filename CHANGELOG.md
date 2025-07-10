@@ -2,7 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
-## [4.1.0] - 2025-07-10
+## [4.1.1] - 2025-07-10
+
+### Changed
+- Deprecated version 4.1.0 due to critical issues
+- Updated documentation to reflect deprecation
+
+## [4.1.0] - 2025-07-10 (DEPRECATED - DO NOT USE)
+**This version has been deprecated due to critical issues. Please upgrade to 4.1.1 or later.**
 
 ### Added
 - New `replaces` option for dynamic permission values

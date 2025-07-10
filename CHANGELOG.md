@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.1.0] - 2025-07-10
+
+### Added
+- New `replaces` option for dynamic permission values
+- Support for parameterized permissions with placeholders
+- Comprehensive documentation for all functions and interfaces
+- TypeScript type definitions for all options
+
+### Changed
+- Improved documentation with detailed examples
+- Better type safety with TypeScript generics
+- Enhanced error messages for debugging
+- Updated dependencies to their latest versions
+
+### Fixed
+- Fixed type definitions for better TypeScript support
+- Resolved edge cases in permission matching
+- Improved handling of special characters in permission strings
+
 ## [4.0.0] - 2025-07-09
 
 ### Added

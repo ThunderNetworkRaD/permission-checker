@@ -2,7 +2,6 @@
 
 [![npm version](https://img.shields.io/npm/v/permission-checker.svg)](https://www.npmjs.com/package/permission-checker)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Bundle Size](https://img.shields.io/bundlephobia/min/permission-checker)](https://bundlephobia.com/package/permission-checker)
 [![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-blue.svg)](https://www.typescriptlang.org/)
 
 A lightweight and efficient permission checking library for JavaScript and TypeScript with zero dependencies, compatible with:
@@ -164,6 +163,25 @@ checkList(
   ['user', 'admin'],
   ['user.profile', 'admin.settings']
 ); // true
+
+// Wildcard support
+console.log(checkList(["*"], ["any.permission"])); // true
+
+// Multiple required permissions
+console.log(
+  checkList(
+    ["user.read", "user.write"],
+    ["user.read", "user.delete"]
+  )
+); // false (missing user.delete)
+
+// Sub-permission check
+console.log(
+  checkList(
+    ["user"],
+    ["user.read", "user.write"]
+  )
+); // true (user includes all sub-permissions)
 ```
 
 # Result table
@@ -291,35 +309,6 @@ The library is optimized for performance with:
 - Efficient permission checking algorithms
 - No external dependencies
 - Small bundle size
-
-## Contributing
-
-Contributions are welcome! Please see our [Contributing Guidelines](CONTRIBUTING.md) for more details.
-
-## License
-
-Apache-2.0 © [ThunderNetworkRaD](https://source.thundernetwork.org/ThunderNetworkRaD)
-
-```typescript
-// Wildcard support
-console.log(checkList(["*"], ["any.permission"])); // true
-
-// Multiple required permissions
-console.log(
-  checkList(
-    ["user.read", "user.write"],
-    ["user.read", "user.delete"]
-  )
-); // false (missing user.delete)
-
-// Sub-permission check
-console.log(
-  checkList(
-    ["user"],
-    ["user.read", "user.write"]
-  )
-); // true (user includes all sub-permissions)
-```
 
 ## Contributing
 

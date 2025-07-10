@@ -1,18 +1,18 @@
 {
   "name": "permission-checker",
-  "version": "4.1.0",
-  "description": "A permission checker for JS and TS with support for Node.js, Bun, and browsers",
+  "version": "4.1.1",
+  "description": "A permission checker for JS and TS with support for Node.js, Bun, and browsers.",
   "type": "module",
-  "main": "./launchers/index.cjs",
-  "module": "./launchers/index.mjs",
+  "main": "./dist/cjs/index.cjs",
+  "module": "./dist/esm/index.mjs",
   "types": "./dist/types/index.d.ts",
-  "browser": "./launchers/index.mjs",
-  "off:exports": {
+  "browser": "./dist/esm/index.mjs",
+  "exports": {
     ".": {
-      "import": "./launchers/index.mjs",
-      "require": "./launchers/index.cjs",
+      "import": "./dist/esm/index.mjs",
+      "require": "./dist/cjs/index.cjs",
       "types": "./dist/types/index.d.ts",
-      "browser": "./launchers/index.mjs"
+      "browser": "./dist/esm/index.mjs"
     }
   },
   "files": [
@@ -49,9 +49,9 @@
   },
   "scripts": {
     "clean": "bunx rimraf dist",
-    "build:esm": "tsc src/index.ts --module ESNext --moduleResolution bundler --target ES2020 --outDir ./dist/module --sourceMap --esModuleInterop --skipLibCheck --forceConsistentCasingInFileNames",
-    "build:cjs": "tsc src/index.ts --module CommonJS --moduleResolution node --target ES2020 --outDir ./dist/common --sourceMap --esModuleInterop --skipLibCheck --forceConsistentCasingInFileNames",
-    "build:types": "tsc --emitDeclarationOnly --declaration --outDir ./dist/types src/index.ts --declarationMap",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:types": "tsc -p tsconfig.dec.json",
     "build": "bun run clean && mkdir -p dist && bun run build:esm && bun run build:cjs && bun run build:types",
     "test": "bun test",
     "prepublishOnly": "bun run build"

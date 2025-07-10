@@ -1,4 +1,4 @@
-import checkList, { checkListOptions } from "./list.js"
+import {checkList, checkListOptions } from "./list.js"
 
 /**
  * Represents a logical AND operation between multiple permission calculations.
@@ -84,7 +84,7 @@ export interface evaluateOptions extends checkListOptions {
  *   }
  * ); // true
  */
-export default function evaluate(permissions: string[], calculation: Calculation, options?: evaluateOptions): boolean {
+export function evaluate(permissions: string[], calculation: Calculation, options?: evaluateOptions): boolean {
     if ('$and' in calculation) {
         return calculation.$and.every((calc) => evaluate(permissions, calc));
     } else if ('$or' in calculation) {

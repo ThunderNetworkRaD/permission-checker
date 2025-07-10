@@ -1,4 +1,4 @@
-import checkSingle, { checkSingleOptions } from "./single.js";
+import { checkSingle, checkSingleOptions } from "./single.js";
 
 /**
  * Options for customizing the behavior of checkList function.
@@ -34,7 +34,7 @@ export interface checkListOptions extends checkSingleOptions {
  * 
  * @see checkSingle For details on how individual permission comparisons work
  */
-export default function checkList(permissions: string[], requiredPermissions: string[], options?: checkListOptions): boolean {
+export function checkList(permissions: string[], requiredPermissions: string[], options?: checkListOptions): boolean {
     // If no permissions are required, return true
     if (!requiredPermissions.length) {
         return true;

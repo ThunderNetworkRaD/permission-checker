@@ -1,4 +1,4 @@
-import fill from "./fill.js";
+import { fill } from "./fill.js";
 import { Replace, WhereToReplace } from "./replace.js";
 
 /**
@@ -59,7 +59,7 @@ export interface checkSingleOptions {
  * | `not`      | `x`       | `ERROR`  | Do not use "not" as permission.                              |
  * | `x`        | `not`     | `FALSE`  | Always false.                                                |
  */
-export default function checkSingle(perm: string, reqPerm: string, options?: checkSingleOptions): boolean {
+export function checkSingle(perm: string, reqPerm: string, options?: checkSingleOptions): boolean {
     if (options?.replaces) {
         options.replaces.forEach((replace: Replace) => {
             switch (replace.where) {

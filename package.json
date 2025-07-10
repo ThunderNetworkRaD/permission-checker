@@ -9,12 +9,9 @@
   "browser": "./launchers/index.mjs",
   "off:exports": {
     ".": {
-      "import": {
-        "default": "./launchers/index.mjs"
-      },
-      "require": {
-        "default": "./launchers/index.cjs"
-      },
+      "import": "./launchers/index.mjs",
+      "require": "./launchers/index.cjs",
+      "types": "./dist/types/index.d.ts",
       "browser": "./launchers/index.mjs"
     }
   },

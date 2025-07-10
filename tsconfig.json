@@ -1,21 +1,25 @@
 {
-  "compilerOptions": {
-    "target": "ES2020",
-    "module": "NodeNext",
-    "strict": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "esModuleInterop": true,
-    "moduleResolution": "NodeNext",
-    "baseUrl": ".",
-    "types": ["bun-types", "node"],
-    "lib": ["ES2020", "DOM"],
-    "allowJs": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "composite": true
-  },
-  "include": ["src"],
-  "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.spec.ts"]
+    "compilerOptions": {
+        "target": "ES2020",
+        "strict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "noEmitOnError": true,
+        "rootDir": ".", // -
+        "baseUrl": "./src", // "."
+        "declaration": true, // -
+
+        // "noEmit": true,
+        // "module": "NodeNext",
+        // "moduleResolution": "NodeNext",
+        // "types": ["bun-types", "node"],
+        // "lib": ["ES2020", "DOM"],
+        // "allowJs": true,
+        // "resolveJsonModule": true,
+        // "isolatedModules": true,
+        // "composite": true
+    },
+    // "include": ["src/**/*"],
+    "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.spec.ts"]
 }

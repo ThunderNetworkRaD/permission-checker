@@ -15,8 +15,7 @@
     }
   },
   "files": [
-    "dist",
-    "launchers"
+    "dist"
   ],
   "repository": "https://source.thundernetwork.org/ThunderNetworkRaD/permission-checker",
   "author": {
